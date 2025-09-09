@@ -4,7 +4,9 @@ import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -134,11 +136,32 @@ public class DayTwo {
       ranking.put(students.get(m), avrgGrade[m]);
     }
     System.out.println("Student ranking list: ");
-    ranking.entrySet().stream().sorted(Map.Entry.comparingByValue()).forEach(System.out::println);
+    int nr = nrstudents;
+    while(nr > 0){
+      double max_ = 0;
+      String max_s = "";
+      for(int b=0;  b < nrstudents; b++){
+        if (ranking.get(students.get(b)) > max_){
+          max_ = ranking.get(students.get(b)); //students Arraylist<String>
+          max_s = students.get(b);
+        }
+      }
+      System.out.println(max_s);
+      ranking.put(max_s, Double.parseDouble("-1.0"));
 
-  }
+    }
+/*
+    LinkedHashMap<String, Double> lhm = new LinkedHashMap<String, Double>(ranking);
+    lhm.entrySet().stream().sorted(Map.Entry.comparingByValue()).sorted(
+        Comparator.reverseOrder().reversed()).forEach(System.out::println);
+    //Collections.reverse(ranking.entrySet().stream().sorted(Map.Entry.comparingByValue())).forEach(System.out::println);
+
+ */
+    }
+  
 
   private int[][] populateGrades(int index,  int[][] grades){
+    Scanner sc = new Scanner(System.in);
     System.out.println("Please enter the grades: ");
     String studentGrades = sc.nextLine();
     String[] gradesTmp = studentGrades.split(" ");
@@ -178,7 +201,7 @@ public class DayTwo {
         maxIndex = j;
       }
     }
-    System.out.println("totalt: " + total + "dyraste dagen: " + vdagar[maxIndex] + "dagar över 100: " + overBudgetCount);
+    System.out.println("totalt: " + total + " kr    dyraste dagen: " + vdagar[maxIndex] + " dagar över 100: " + overBudgetCount);
 
   }
 
@@ -215,7 +238,8 @@ public class DayTwo {
        System.out.println("Vänligen skriv in namn på vara nr: " + (i + 1));
        varor[i] = sc.next();
        System.out.println("Vänligen skriv in pris på vara: " + (i + 1));
-       double tmpPris = sc.nextDouble();
+
+       double tmpPris = Double.parseDouble(sc.next().replaceAll(",", "."));
        totalKostnad += tmpPris;
        priser[i] = tmpPris;
        if(priser[i] > priser[indexDyraste]){

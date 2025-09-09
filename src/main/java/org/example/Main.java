@@ -14,9 +14,9 @@ public class Main {
 //    new DayTwoLiveCode().program1();
 //    new DayTwo().temperaturanalysFörEnVecka();
 //    new DayTwo().studentbetygFörEnKlass();
-//    new DayTwo().veckansUtgifter();
+    new DayTwo().veckansUtgifter();
 //    new DayTwo().handelslistaMedPriser();
-    new DayTwo().enkelTallek();
+//    new DayTwo().enkelTallek();
 
   }
 
