@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -83,15 +84,14 @@ public class DayTwo {
     int[][] grades = new int[nrstudents][5];
     double[] avrgGrade = new double[nrstudents];
 
-        //namn
-        //1 2 3 4 5
-
-    for(int s=0; s> nrstudents; s++){
+    for(int s = 0; s < nrstudents; s++){
 
       //3.1. Läs in namn (String-array)
       System.out.println("Please enter the student #" + s + " name: ");
-      students.add(sc.nextLine());
-      grades = populateGrades(s, sc.nextLine(), grades);
+      students.add(sc.next());
+
+      grades = populateGrades(s, grades);
+
       int sum = 0;
 
       // 3.2. Läs in 5 betyg (int-array för varje student = 2D-array)
@@ -126,22 +126,27 @@ public class DayTwo {
         fail.add(students.get(k));
       }
     }
-    System.out.println("pass: " + pass.size() + "fail: " + fail.size());
+    System.out.println( pass.size() + " have passed the class, " + fail.size()+" have failed.");
 
 //    4.5. Visa en ranking-lista (sortera studenter efter genomsnitt)
-    HashMap<String, Double> tmp = new HashMap<String, Double>();
+    HashMap<String, Double> ranking = new HashMap<String, Double>();
     for(int m= 0; m < nrstudents; m++){
-      tmp.put(students.get(m), avrgGrade[m]);
+      ranking.put(students.get(m), avrgGrade[m]);
     }
-    System.out.println("Student ranking list");
-    tmp.entrySet().stream().sorted(Map.Entry.comparingByValue()).forEach(System.out::println);
+    System.out.println("Student ranking list: ");
+    ranking.entrySet().stream().sorted(Map.Entry.comparingByValue()).forEach(System.out::println);
 
   }
 
-  // 1 2 3 4 5
-
-  private int[][] populateGrades(int index, String studentGrades, int[][] grades){
+  private int[][] populateGrades(int index,  int[][] grades){
+    System.out.println("Please enter the grades: ");
+    String studentGrades = sc.nextLine();
     String[] gradesTmp = studentGrades.split(" ");
+    while(gradesTmp.length != 5){
+      System.out.println("Please enter 5 grades: ");
+      studentGrades = sc.nextLine();
+      gradesTmp = studentGrades.split(" ");
+    }
     for(int i = 0; i < gradesTmp.length; i++){
       grades[index][i] = Integer.parseInt(gradesTmp[i]);
     }
@@ -149,16 +154,109 @@ public class DayTwo {
   }
 
   public void veckansUtgifter() {
+    String[] vdagar  = {"måndag", "tisdag", "onsdag", "torsdag", "fredag", "lördag", "söndag"};
+    //Skapa en array för 7 dagars utgifter (double[])
+    int[] kostnad = new int[7];
+    Scanner sc = new Scanner(System.in);
+    for(int i = 0; i < vdagar.length; i++){
+      System.out.println("Vad har du för utgifter för " + vdagar[i]+"?");
+      String tmp = sc.nextLine();
+      kostnad[i] = Integer.parseInt(tmp);
+    }
+    int total = 0;
+
+    int overBudgetCount = 0;
+    for(int k : kostnad){
+      total += k;
+      if(k > 100){ overBudgetCount++;}
+    }
+    int max   = 0;
+    int maxIndex = -1;
+    for(int j = 0; j < vdagar.length; j++){
+      if(kostnad[j] > max){
+        max = kostnad[j];
+        maxIndex = j;
+      }
+    }
+    System.out.println("totalt: " + total + "dyraste dagen: " + vdagar[maxIndex] + "dagar över 100: " + overBudgetCount);
 
   }
+
+  /*Uppgift 4: Handelslista med priser
+      Beskrivning
+  Skapa en handelslista där användaren kan mata in varor och priser.
+      Krav
+● Fråga användaren hur många varor de vill köpa (max 10)
+● Skapa arrayer för varnamn (String[]) och priser (double[])
+      ● Använd for-loop för att läsa in varor och priser
+● Använd for-loop för att:
+      ○ Räkna totalkostnad
+○ Hitta dyraste varan
+○ Visa hela listan*/
 
   public void handelslistaMedPriser () {
+    Scanner sc = new Scanner(System.in);
+    System.out.println("Hur många varor vill du köpa? "
+        + "ange ett tal mellan 1 och 10");
+    int nr = sc.nextInt();
 
+    if(nr > 10 || nr < 1){
+      System.out.println("Ogiltigt antal varor"
+          + " ange ett antal mellan 1 och 10");
+      handelslistaMedPriser();
+    }
+    else{
+     String[] varor = new String[nr];
+     double[] priser = new double[nr];
+     double totalKostnad = 0.0;
+     int indexDyraste = 0;
+     
+     for(int i = 0; i < varor.length; i++){
+       System.out.println("Vänligen skriv in namn på vara nr: " + (i + 1));
+       varor[i] = sc.next();
+       System.out.println("Vänligen skriv in pris på vara: " + (i + 1));
+       double tmpPris = sc.nextDouble();
+       totalKostnad += tmpPris;
+       priser[i] = tmpPris;
+       if(priser[i] > priser[indexDyraste]){
+         indexDyraste = i;
+       }
+     }
+     System.out.println("Totalkostnad: " + totalKostnad);
+      System.out.println("Dyraste varan: " + varor[indexDyraste] +
+          " pris: " + priser[indexDyraste]);
+      System.out.println("Varor");
+      for(int i = 0; i < nr; i++){
+        System.out.println(varor[i] + " " + priser[i]);
+      }
+    }
   }
 
-  // Begaiym
   public void enkelTallek() {
+    Scanner sc = new Scanner(System.in);
+    int[] computerSecret = new int[5];
+    for(int i = 0; i < computerSecret.length; i++){
+      computerSecret[i] = (int) (Math.random() * 20) + 1;
+    }
 
-    System.out.println();
+    List<Integer> userGuesses = new ArrayList<>();
+    int succces = 0;
+    boolean[] correctGuesses = new boolean[computerSecret.length];
+
+    while(succces < 5 && userGuesses.size() < 15){
+      System.out.println("Please enter your guess: ");
+      userGuesses.add(sc.nextInt());
+
+      for(int i = 0; i < computerSecret.length; i++){
+          if((computerSecret[i] == userGuesses.get(userGuesses.size() - 1)) &&
+          !correctGuesses[i]){
+            correctGuesses[i] = true;
+            succces++;
+          }
+      }
+    }
+    System.out.println("Your attempts are: " + userGuesses.size());
+    System.out.println("Success: " + succces);
+
   }
 }
