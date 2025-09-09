@@ -1,15 +1,24 @@
 package org.example;
 
-public class Main {
+import java.util.Scanner;
 
+public class Main {
+  private static Scanner scanner = new Scanner(System.in);
   public static void main(String[] args) {
 
-    System.out.printf("");
-    System.out.printf("");
-    System.out.printf("");
-    System.out.println();
-    System.out.printf("");
-    Chat chat = new Chat("Lolly", "hello", 5);
-    System.out.println("Hello world! 1 " + chat.toString());
+//    new DayOne().bankkontoSimulator();
+//    new DayOne().betygskonverterare();
+//    new DayOne().enkelKalkylator();
+//    new DayOne().temperaturomvandlareMedRekommendationer();
+//    new DayOne().ålderskategorier();
+
+//    new DayTwoLiveCode().program1();
+//    new DayTwo().temperaturanalysFörEnVecka();
+    new DayTwo().studentbetygFörEnKlass();
+//    new DayTwo().veckansUtgifter();
+//    new DayTwo().handelslistaMedPriser();
+//    new DayTwo().enkelTallek();
+
   }
+
 }
