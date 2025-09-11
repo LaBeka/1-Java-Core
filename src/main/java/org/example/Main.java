@@ -14,9 +14,17 @@ public class Main {
 //    new DayTwoLiveCode().program1();
 //    new DayTwo().temperaturanalysFörEnVecka();
 //    new DayTwo().studentbetygFörEnKlass();
-    new DayTwo().veckansUtgifter();
+//    new DayTwo().veckansUtgifter();
 //    new DayTwo().handelslistaMedPriser();
 //    new DayTwo().enkelTallek();
+
+ //   new DayThree().liveCode();
+
+//    BiblioteksSystem anthony = new BiblioteksSystem();
+//    BiblioteksSystem yuka = new BiblioteksSystem();
+//    BiblioteksSystem joakim = new BiblioteksSystem();
+//    BiblioteksSystem begaiym = new BiblioteksSystem();
+//    BiblioteksSystem niklas = new BiblioteksSystem();
 
   }
 
