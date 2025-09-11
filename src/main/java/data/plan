@@ -1,0 +1,15 @@
+1. main{
+  initData
+  menuLoop
+}
+2. menuLoop{
+    while (true){
+      handleChoice
+    }
+}
+3.handleChoice:
+Person 1: case 1, 2, 8
+Person 2: case 3, 4, 6
+Person 3: case 9, 10, 11
+Person 4: case 5
+Person 5: case 7
